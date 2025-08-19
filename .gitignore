@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PDFs & uploads
+*.pdf
+uploaded.pdf
+
+# HuggingFace / Torch model cache
+~/.cache/
+~/.huggingface/
+~/.torch/
