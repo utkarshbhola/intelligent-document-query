@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intelligent Document Query</title>
+</head>
+<body>
+  <h1>Upload PDF</h1>
+  <input type="file" id="pdfInput">
+  <button onclick="uploadPDF()">Submit</button>
+
+  <h2>Summary</h2>
+  <p id="summary"></p>
+
+  <h2>Generated Questions</h2>
+  <ul id="questions"></ul>
+
+  <script>
+    async function uploadPDF() {
+      const fileInput = document.getElementById("pdfInput");
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a PDF file!");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("pdf", file);
+
+      const response = await fetch("http://127.0.0.1:8000/process", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      document.getElementById("summary").innerText = data.summary;
+      const questionsList = document.getElementById("questions");
+      questionsList.innerHTML = "";
+      data.questions.forEach(q => {
+        const li = document.createElement("li");
+        li.innerText = q;
+        questionsList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
