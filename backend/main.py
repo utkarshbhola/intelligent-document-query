@@ -45,7 +45,7 @@ async def process_pdf(pdf: UploadFile = File(...)):
     summary = summarizer(text, max_length=200, min_length=50, do_sample=False)[0]['summary_text']
 
     # Generate questions
-    q_out = qg("generate questions: " + summary, max_length=64, num_return_sequences=5)
+    q_out = qg("generate questions: " + summary, max_length=64, num_return_sequences=5, num_beams=5)
     questions = [q["generated_text"] for q in q_out]
 
     return {"summary": summary, "questions": questions}
